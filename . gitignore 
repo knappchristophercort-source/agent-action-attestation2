@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Demo outputs (generated at runtime)
+demo/*.wal
+demo/*.wal.idx
+demo/*.json
+demo/*.txt
+demo/*.csv
+demo/*.sql
+demo/public-key.pem
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Test coverage
+coverage/
+.nyc_output/
