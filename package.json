@@ -1,0 +1,30 @@
+{
+  "name": "agent-action-attestation",
+  "version": "2.0.0",
+  "description": "Cryptographic attestation of AI agent actions for compliance (SEC 17a-4, SOC 2, PCI-DSS)",
+  "main": "src/ledger.js",
+  "scripts": {
+    "demo": "node demo/compliance-demo.js",
+    "test": "node demo/compliance-demo.js",
+    "verify": "node scripts/verify-ledger.js"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "attestation",
+    "audit",
+    "compliance",
+    "fintech",
+    "sec-17a-4",
+    "soc2",
+    "pci-dss",
+    "tamper-evident",
+    "wal",
+    "write-ahead-log"
+  ],
+  "author": "Your Name",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
