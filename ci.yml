@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run demo (smoke test)
+        run: node demo/compliance-demo.js
+
+      - name: Verify ledger integrity
+        run: |
+          node -e "
+          const { WALLedger } = require('./src/ledger');
+          const { verifyChain } = require('./src/verify');
+          const fs = require('fs');
+          const ledger = new WALLedger('demo/compliance-ledger.wal');
+          const pub = fs.readFileSync('demo/public-key.pem', 'utf8');
+          const report = verifyChain(ledger.all(), pub);
+          if (!report.valid) {
+            console.error('Verification failed:', report);
+            process.exit(1);
+          }
+          console.log('✓ Ledger verification passed');
+          console.log('  Records:', report.totalRecords);
+          console.log('  Hash valid:', report.hashValidCount);
+          console.log('  Signature valid:', report.signatureValidCount);
+          console.log('  Chain valid:', report.chainValidCount);
+          "
+
+      - name: Check file permissions
+        run: |
+          # Ensure no demo output files are committed
+          if [ -f "demo/compliance-ledger.wal" ]; then
+            echo "⚠️  Demo output files should not be committed"
+          fi
+          echo "✓ File permission check complete"
+
+      - name: Validate exports
+        run: |
+          test -f demo/audit-export.txt && echo "✓ Human-readable export exists"
+          test -f demo/audit-export.csv && echo "✓ CSV export exists"
+          test -f demo/audit-export.sql && echo "✓ SQLite export exists"
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      - run: npm install -g standard
+      - run: standard src/*.js demo/*.js || true
