@@ -20,8 +20,8 @@ A lightweight, drop-in attestation layer for AI agents that execute real-world a
 
 SQLite allows `UPDATE` and `DELETE`. Our WAL (Write-Ahead Log) format is **physically append-only** — no API exists to modify or delete records. Each record embeds its own integrity proof. Auditors can verify with just `hexdump` and `openssl`.
 
-[Read the threat model →](THREAT_MODEL.md)  
-[Read the limitations →](LIMITATIONS.md)
+[Read the threat model →](docs/THREAT_MODEL.md)  
+[Read the limitations →](docs/LIMITATIONS.md)
 
 ## Quick Start
 
