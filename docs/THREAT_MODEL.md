@@ -268,4 +268,4 @@ console.log('Signature valid:', report.signatureValidCount, '/', report.totalRec
 
 ---
 
-*This threat model is a living document. If you identify a threat not covered here, please open a security issue (see SECURITY.md).*
+*This threat model is a living document. If you identify a threat not covered here, please open a security issue (see ../SECURITY.md).*

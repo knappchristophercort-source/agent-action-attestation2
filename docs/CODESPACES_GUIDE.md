@@ -118,11 +118,9 @@ ls -la
 You should see:
 ```
 .gitignore
-LIMITATIONS.md
 README.md
 SECURITY.md
-THREAT_MODEL.md
-VIDEO_SCRIPT.md
+docs/
 package.json
 demo/
 scripts/
