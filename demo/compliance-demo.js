@@ -70,6 +70,7 @@ async function main() {
   const ledger = new WALLedger(LEDGER_PATH);
 
   async function realSendEmail(payload) {
+    // "attached" reflects that the email carries the report as an attachment
     console.log(`   [effector] Sending email to ${payload.to}: "${payload.subject} attached"`);
     return { status: 'sent', messageId: 'msg_' + Date.now() };
   }
@@ -95,10 +96,12 @@ async function main() {
   console.log(JSON.stringify(summarizeVerification(report1), null, 2));
   console.log();
 
-  // Simulate tampering: alter the payload of record 2 (the SELL trade)
+  // Simulate tampering: alter the payload of record 2 (the SELL trade — last of 3 records)
+  // Index 2 = sequence 2 = the third record appended above.
+  const TAMPERED_INDEX = 2;
   console.log('=== Simulating tampering ===');
   const tamperedRecords = records.map((r, i) => {
-    if (i === 2) {
+    if (i === TAMPERED_INDEX) {
       return { ...r, payload: { ...r.payload, qty: 9999 } };
     }
     return r;
