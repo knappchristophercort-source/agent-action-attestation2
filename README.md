@@ -2,7 +2,7 @@
 
 > Cryptographic, tamper-evident logging of AI agent actions for financial compliance.
 
-[![Compliance](https://img.shields.io/badge/compliance-SEC%2017a--4%20%7C%20SOC%202%20%7C%20PCI--DSS-blue)]()
+[![Compliance](https://img.shields.io/badge/compliance-SEC%2017a--4%20%7C%20SOC%202%20%7C%20PCI--DSS--aligned-blue)]()
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## What This Is
